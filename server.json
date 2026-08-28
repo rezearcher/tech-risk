@@ -1,0 +1,15 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.rezearcher/tech-risk",
+  "description": "Security enrichment: tech-stack -> CVE/EPSS/CISA-KEV findings, $0.05 USDC per query",
+  "title": "Tech Risk Enrichment",
+  "version": "1.2.0",
+  "$comment": "Distribution manifest for the tech-risk MCP server. Implementation lives in the x402-data-api worker (route portfolio: /enrich/tech-risk, /enrich/domain, /scan/mcp). Version mirrors the live MCP registry listing.",
+  "websiteUrl": "https://x402-data-api.sigrunner.workers.dev",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://x402-data-api.sigrunner.workers.dev/mcp"
+    }
+  ]
+}

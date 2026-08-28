@@ -1,0 +1,17 @@
+runtime: "remote"
+remote:
+  url: "https://x402-data-api.sigrunner.workers.dev/mcp"
+  transport: "streamable-http"
+
+startCommand:
+  type: "http"
+
+name: "tech-risk"
+displayName: "Tech Risk Enrichment"
+description: >
+  x402-gated security enrichment MCP. Tech-stack -> CVE/EPSS/CISA-KEV findings
+  and risk score, plus MCP-server scanning for tool-poisoning, prompt-injection
+  & exfiltration risk (OWASP LLM01/LLM08). $0.05 per query via x402 (USDC on
+  Base), no API key required.
+license: "MIT"
+homepage: "https://github.com/rezearcher/tech-risk"

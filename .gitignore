@@ -1,0 +1,15 @@
+# Secrets — never commit
+.env
+.dev.vars
+buyer-wallet.json
+.mcp-registry-key
+.mcp-ed25519-key.pem
+*.pem
+
+# Node / tooling
+node_modules/
+.wrangler/
+package-lock.json
+
+# OS
+.DS_Store
