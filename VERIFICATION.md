@@ -83,5 +83,5 @@ never crawled. Any downstream claim of "listed on Smithery" is false. This is th
 | 3. Repo publicity | PASS | GitHub API: public, not archived |
 | 4. smithery.yaml listing state | FAIL | Smithery soft-404 + registry 404 "Server not found" |
 
-Follow-up filed: Smithery publish of `tech-risk` (t_<created>) — the repo carries smithery.yaml
+Follow-up filed: Smithery publish of `tech-risk` (t_057daf23) — the repo carries smithery.yaml
 but nothing is live on Smithery.
