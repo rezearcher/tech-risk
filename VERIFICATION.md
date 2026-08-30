@@ -14,7 +14,7 @@ PASS: MCP registry listing — https://registry.modelcontextprotocol.io/v0/serve
 
 PASS: Repo publicity — https://api.github.com/repos/rezearcher/tech-risk returned HTTP 200, private=false, archived=false (public, reachable) — 2026-08-30T07:17:35Z
 
-FAIL: smithery.yaml listing state — https://smithery.ai/server/tech-risk returned HTTP 200 soft-404 ("404: Page Not Found") and https://registry.smithery.ai/servers/@rezearcher/tech-risk returned HTTP 404 {"error":"Server not found"}; no live Smithery listing under any slug — 2026-08-30T07:17:44Z
+PASS: Smithery listing — https://smithery.ai/server/rezearcher/tech-risk returned HTTP 200 rendering "Tech Risk Enrichment" with all 22 tools; registry API https://api.smithery.ai/servers/rezearcher/tech-risk returned HTTP 200 (remote, deploymentUrl https://tech-risk--rezearcher.run.tools); release 3f1c5287-fa71-4edf-99bd-f7eb72a37d8f status=SUCCESS, scan discovered 22 tools — 2026-08-30T07:26Z (published via PUT /servers/rezearcher/tech-risk + PUT .../releases with external_shttp payload)
 
 ---
 
@@ -58,19 +58,29 @@ and README registry link point at `https://github.com/rezearcher/tech-risk` — 
 public repo — so the ARCHITECTURE.md "homepage link mismatch" concern is resolved: the advertised
 link is correct. Local directory name `x402-tech-risk` is just a local checkout name.
 
-## Claim 4 — smithery.yaml listing state: **FAIL**
+## Claim 4 — smithery.yaml listing state: **PASS** (now published)
 
-`smithery.yaml` exists in the repo (runtime: remote, streamable-http → the live MCP URL), but
-**no live Smithery listing exists** for tech-risk under any slug:
+`smithery.yaml` exists in the repo (runtime: remote, streamable-http → the live MCP URL). The
+listing was **not live** at 07:17Z (soft-404s; never published), but was **published and verified
+live** at 07:26Z via the Smithery HTTP API:
 
-- `https://smithery.ai/server/tech-risk` → HTTP 200 but page renders **"404: Page Not Found"** (soft-404 SPA) · `2026-08-30T07:17:44Z`
-- `https://smithery.ai/server/x402-tech-risk` → HTTP 200 soft-404 · `2026-08-30T07:17:52Z`
-- `https://smithery.ai/server/rezearcher-tech-risk` → HTTP 200 soft-404 · `2026-08-30T07:17:52Z`
-- `https://registry.smithery.ai/servers/@rezearcher/tech-risk` → **HTTP 404** `{"error":"Server not found"}` · `2026-08-30T07:17:40Z`
-- Smithery servers registry list: 0 hits for `tech-risk` / `rezearcher` in 10-server sample · `2026-08-30T07:17:47Z`
+- `PUT https://api.smithery.ai/servers/rezearcher/tech-risk` → **HTTP 201** (server created) · `2026-08-30T07:23:58Z`
+- `PUT https://api.smithery.ai/servers/rezearcher/tech-risk/releases` → **HTTP 202**, release
+  `3f1c5287-fa71-4edf-99bd-f7eb72a37d8f` status **SUCCESS** (`external_shttp`, upstream
+  `https://x402-data-api.sigrunner.workers.dev/mcp`); scan discovered server
+  `x402-data-api v0.1.0` with **22 tools**; deploy log: "Deployment successful" · `2026-08-30T07:26:28Z..07:26:38Z`
+- `https://api.smithery.ai/servers/rezearcher/tech-risk` → **HTTP 200**, `remote: true`,
+  `deploymentUrl: https://tech-risk--rezearcher.run.tools`, `connections[0].type: http` with full
+  22-tool list · `2026-08-30T07:27Z`
+- `https://smithery.ai/server/rezearcher/tech-risk` → **HTTP 200** rendering the listing
+  (displayName "Tech Risk Enrichment", tool names `enrich_tech_risk`, `scan_mcp_server`, etc.) ·
+  `2026-08-30T07:27Z`
+- Proxy root `https://tech-risk--rezearcher.run.tools` → **HTTP 401 x402 challenge**
+  (`invalid_token` / `Missing Authorization header`) — i.e. the Smithery proxy is live and
+  correctly enforces the x402 payment gate (NOT a 404; this is the designed pay-per-query behavior).
 
-Result: the smithery.yaml manifest is present in the repo but the listing was never published /
-never crawled. Any downstream claim of "listed on Smithery" is false. This is the sole FAIL.
+Result: `tech-risk` is now live on Smithery at `https://smithery.ai/server/rezearcher/tech-risk`,
+with deployment `https://tech-risk--rezearcher.run.tools` proxying to the x402-gated upstream.
 
 ---
 
@@ -81,7 +91,8 @@ never crawled. Any downstream claim of "listed on Smithery" is false. This is th
 | 1. Endpoint liveness + 402 gating | PASS | /mcp 200 free discovery; 3 paid routes all 402 + challenge |
 | 2. MCP registry listing (v1.2.0) | PASS | registry API lists active v1.2.0, isLatest |
 | 3. Repo publicity | PASS | GitHub API: public, not archived |
-| 4. smithery.yaml listing state | FAIL | Smithery soft-404 + registry 404 "Server not found" |
+| 4. smithery.yaml listing state | PASS | live listing smithery.ai/server/rezearcher/tech-risk + SUCCESS release |
 
-Follow-up filed: Smithery publish of `tech-risk` (t_057daf23) — the repo carries smithery.yaml
-but nothing is live on Smithery.
+Follow-up (t_057daf23) resolved 2026-08-30T07:26Z: Smithery publish of `tech-risk` completed —
+listing live at https://smithery.ai/server/rezearcher/tech-risk, proxy at
+https://tech-risk--rezearcher.run.tools (x402-gated).
