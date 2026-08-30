@@ -56,3 +56,13 @@ Scans a remote MCP server for tool-poisoning / prompt-injection / exfiltration r
 ## Registry
 
 Listed on the official MCP registry as `io.github.rezearcher/tech-risk` (v1.0.0+), remote → `https://x402-data-api.sigrunner.workers.dev/mcp`.
+
+## Smithery
+
+Live listing on [Smithery](https://smithery.ai):
+
+- **Canonical slug:** `rezearcher/tech-risk` (Smithery namespaces third-party servers as `<owner>/<name>`; a bare single-segment `tech-risk` slug does not exist and cannot be claimed by a third party).
+- **Listing page:** https://smithery.ai/servers/rezearcher/tech-risk
+- **Registry API (HTTP 200):** https://registry.smithery.ai/servers/rezearcher/tech-risk
+- **Deployment proxy:** https://tech-risk--rezearcher.run.tools (proxies to the x402-gated upstream; unauthenticated requests get the x402 payment challenge, per design)
+- **Runtime:** remote streamable-http → `https://x402-data-api.sigrunner.workers.dev/mcp` (see [smithery.yaml](smithery.yaml))

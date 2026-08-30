@@ -96,3 +96,16 @@ with deployment `https://tech-risk--rezearcher.run.tools` proxying to the x402-g
 Follow-up (t_057daf23) resolved 2026-08-30T07:26Z: Smithery publish of `tech-risk` completed —
 listing live at https://smithery.ai/server/rezearcher/tech-risk, proxy at
 https://tech-risk--rezearcher.run.tools (x402-gated).
+
+### Canonical slug note (t_00c1fca6 re-verify, 2026-08-30)
+
+Re-verified live (registry HTTP 200 with full JSON, tools listed, deployment proxy up):
+`https://registry.smithery.ai/servers/rezearcher/tech-risk` → **200**.
+
+The canonical slug is `rezearcher/tech-risk` (namespaced). A bare single-segment
+`https://registry.smithery.ai/servers/tech-risk` → 404 is NOT a missing listing:
+Smithery namespaces third-party servers as `<owner>/<name>` (single-segment slugs like
+`brave`/`exa` exist only for first-party bySmithery servers — confirmed in
+https://smithery.ai/docs and by the 404 payload `{"error":"Namespace not found"}`).
+Registering a duplicate under a second slug is explicitly against the task guardrail
+(exactly one canonical entry), so the canonical slug is recorded here and in README.md.
